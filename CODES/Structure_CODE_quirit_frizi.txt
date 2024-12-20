@@ -1,0 +1,249 @@
+CODE_qurit-frizi/
+├── LICENSE.html
+├── README.md
+└── main
+    ├── Dockerfile
+    ├── corelib
+    │   ├── README.md
+    │   ├── docs
+    │   │   └── source
+    │   │       ├── conf.py
+    │   │       └── index.rst
+    │   ├── pytest.ini
+    │   ├── requirements-docs.txt
+    │   ├── requirements.txt
+    │   ├── setup.cfg
+    │   ├── setup.py
+    │   ├── setup_utils.py
+    │   ├── src
+    │   │   ├── corelib
+    │   │   │   ├── __init__.py
+    │   │   │   ├── dicom.py
+    │   │   │   ├── features.py
+    │   │   │   ├── features_generic.py
+    │   │   │   ├── figure_gallery.py
+    │   │   │   ├── figure_mips.py
+    │   │   │   ├── figure_scatter.py
+    │   │   │   ├── inference_dense.py
+    │   │   │   ├── inference_test_time_augmentations.py
+    │   │   │   ├── lz4_pkl.py
+    │   │   │   ├── metadata.py
+    │   │   │   ├── metrics.py
+    │   │   │   ├── nifty.py
+    │   │   │   ├── sampler.py
+    │   │   │   ├── sub_tensor.py
+    │   │   │   └── typing.py
+    │   │   ├── optimizer_clipping.py
+    │   │   └── optimizers_v2.py
+    │   ├── tasks.py
+    │   └── test
+    │       ├── test_function_to_test.py
+    │       └── test_inference.py
+    ├── main.py
+    ├── requirements.txt
+    └── src
+        ├── DicomNiftiConversion.py
+        ├── analysis_plots.py
+        ├── basic_typing.py
+        ├── bokeh_ui.py
+        ├── callback_experiment_tracking.py
+        ├── callback_explain_decision.py
+        ├── callbacks
+        │   ├── __init__.py
+        │   ├── callback.py
+        │   ├── callback_debug_processes.py
+        │   ├── callback_early_stopping.py
+        │   ├── callback_epoch_summary.py
+        │   ├── callback_explain_decision.py
+        │   ├── callback_export_classification_report.py
+        │   ├── callback_export_convolution_kernel.py
+        │   ├── callback_export_history.py
+        │   ├── callback_learning_rate_finder.py
+        │   ├── callback_learning_rate_recorder.py
+        │   ├── callback_profiler.py
+        │   ├── callback_reporting_augmentations.py
+        │   ├── callback_reporting_best_metrics.py
+        │   ├── callback_reporting_classification_errors.py
+        │   ├── callback_reporting_dataset_summary.py
+        │   ├── callback_reporting_epoch_summary.py
+        │   ├── callback_reporting_export_samples.py
+        │   ├── callback_reporting_layer_statistics.py
+        │   ├── callback_reporting_layer_weights.py
+        │   ├── callback_reporting_learning_rate_recorder.py
+        │   ├── callback_reporting_model_summary.py
+        │   ├── callback_reporting_start_server.py
+        │   ├── callback_save_last_model.py
+        │   ├── callback_skip_epoch.py
+        │   ├── callback_tensorboard.py
+        │   ├── callback_tensorboard_embedding.py
+        │   ├── callback_tensorboard_record_history.py
+        │   ├── callback_tensorboard_record_model.py
+        │   ├── callback_worst_samples_by_epoch.py
+        │   └── callback_zip_sources.py
+        ├── collate.py
+        ├── compatibility.py
+        ├── compute_features.py
+        ├── config
+        │   └── config.json
+        ├── data.py
+        ├── data_category.py
+        ├── data_parallel_extented.py
+        ├── datasets.py
+        ├── export.py
+        ├── filter_gaussian.py
+        ├── flatten.py
+        ├── graceful_killer.py
+        ├── grad_cam.py
+        ├── graph_reflection.py
+        ├── guided_back_propagation.py
+        ├── hornetlib.py
+        ├── integrated_gradients.py
+        ├── job_executor2.py
+        ├── layers
+        │   ├── autoencoder_convolutional.py
+        │   ├── autoencoder_convolutional_variational.py
+        │   ├── backbone_decoder.py
+        │   ├── blocks.py
+        │   ├── convs.py
+        │   ├── convs_2d.py
+        │   ├── convs_3d.py
+        │   ├── convs_transpose.py
+        │   ├── crop_or_pad.py
+        │   ├── deep_supervision.py
+        │   ├── denses.py
+        │   ├── efficient_net.py
+        │   ├── encoder_decoder_resnet.py
+        │   ├── fcnn.py
+        │   ├── flatten.py
+        │   ├── gan.py
+        │   ├── layer_config.py
+        │   ├── non_local.py
+        │   ├── ops_conversion.py
+        │   ├── resnet_preact.py
+        │   ├── shift_scale.py
+        │   ├── sub_tensor.py
+        │   ├── unet_attention.py
+        │   ├── unet_base.py
+        │   ├── utils
+        │   │   ├── __init__.py
+        │   │   ├── batch_pad.py
+        │   │   ├── batch_pad_minmax.py
+        │   │   ├── clamp_n.py
+        │   │   ├── flatten.py
+        │   │   ├── global_pooling.py
+        │   │   ├── graceful_killer.py
+        │   │   ├── load_module.py
+        │   │   ├── number_formatting.py
+        │   │   ├── optional_import.py
+        │   │   ├── requires.py
+        │   │   ├── safe_filename.py
+        │   │   ├── sub_tensor.py
+        │   │   └── upsample.py
+        │   └── utils.py
+        ├── load_module.py
+        ├── loss_boundary.py
+        ├── losses.py
+        ├── meaningful_perturbation.py
+        ├── metrics.py
+        ├── model_refiner_multiclass_deepsupervision_configured_v1.py
+        ├── model_stacking.py
+        ├── model_unet_multiclass.py
+        ├── model_unet_multiclass_deepsupervision.py
+        ├── model_unet_multiclass_deepsupervision_configured_v1.py
+        ├── normalize_data.py
+        ├── number_formatting.py
+        ├── optional_import copy.py
+        ├── optional_import.py
+        ├── options.py
+        ├── outputs.py
+        ├── params.py
+        ├── preprocess.py
+        ├── preprocess_hdf5.py
+        ├── raiven.py
+        ├── reporting_bokeh.py
+        ├── reporting_bokeh_graph.py
+        ├── reporting_bokeh_samples.py
+        ├── reporting_bokeh_tabs_dynamic_data.py
+        ├── reporting_bokeh_tabs_dynamic_header.py
+        ├── resize.py
+        ├── rtstructHelper.py
+        ├── sample_export.py
+        ├── sampler.py
+        ├── segmentation
+        │   ├── __init__.py
+        │   ├── augmentations.py
+        │   ├── callback_report.py
+        │   ├── callbacks.py
+        │   ├── metrics.py
+        │   ├── model_denseunet.py
+        │   ├── model_lstm.py
+        │   ├── model_refiner_multiclass_deepsupervision_configured_v1.py
+        │   ├── model_unet_multiclass.py
+        │   ├── model_unet_multiclass_deepsupervision.py
+        │   ├── model_unet_multiclass_deepsupervision_configured_v1.py
+        │   ├── model_unet_transformer.py
+        │   ├── trainer.py
+        │   ├── transform_change_lesion_contrast.py
+        │   └── transform_label_seg.py
+        ├── sequence.py
+        ├── sequence_array.py
+        ├── sequence_async_reservoir.py
+        ├── sequence_collate.py
+        ├── sequence_map.py
+        ├── sequence_rebatch.py
+        ├── src_transforms.py
+        ├── startup_utilities.py
+        ├── store.py
+        ├── table_sqlite.py
+        ├── trainer.py
+        ├── trainer_v2.py
+        ├── transform_export_mip.py
+        ├── transforms
+        │   ├── __init__.py
+        │   ├── affine.py
+        │   ├── copy.py
+        │   ├── crop.py
+        │   ├── cutout_function.py
+        │   ├── deform.py
+        │   ├── flip.py
+        │   ├── normalize.py
+        │   ├── renormalize.py
+        │   ├── resample.py
+        │   ├── resize.py
+        │   ├── spatial_info.py
+        │   ├── stack.py
+        │   ├── transform_move_to_device.py
+        │   ├── transforms.py
+        │   ├── transforms_affine.py
+        │   ├── transforms_cast.py
+        │   ├── transforms_compose.py
+        │   ├── transforms_normalize_intensity.py
+        │   ├── transforms_one_of.py
+        │   ├── transforms_random_crop_pad.py
+        │   ├── transforms_random_crop_resize.py
+        │   ├── transforms_random_cutout.py
+        │   ├── transforms_random_deformation.py
+        │   ├── transforms_random_flip.py
+        │   ├── transforms_resample.py
+        │   ├── transforms_resize.py
+        │   ├── transforms_resize_modulo_pad_crop.py
+        │   ├── transforms_squeeze.py
+        │   └── transforms_unsqueeze.py
+        ├── transforms_augmentation_affine.py
+        ├── transforms_clean_features.py
+        ├── utilities.py
+        └── utils
+            ├── __init__.py
+            ├── batch_pad.py
+            ├── batch_pad_minmax.py
+            ├── clamp_n.py
+            ├── flatten.py
+            ├── global_pooling.py
+            ├── graceful_killer.py
+            ├── load_module.py
+            ├── number_formatting.py
+            ├── optional_import.py
+            ├── requires.py
+            ├── safe_filename.py
+            ├── sub_tensor.py
+            └── upsample.py
