@@ -60,13 +60,15 @@ blabla
 ### 5 - Self-Paced Learning ("A Survey on Curriculum Learning")
 #### 5.1 - Résumé de la méthode
 Le but est de demander au réseau de commencer par s'entrainer sur les cas ayant les coûts les plus faibles (ie. ceux dont la valeur associée dans la fonction de perte est faible). Voir le schéma b de la figure 2 du document pour une représentation imagée.
-- Première méthode (classique) :
+- <u>Première méthode (classique) :</u>
     Dans les faits, on va entrainer successivement le réseau sur toutes les données mais en associant des poids à chaque entrée.
-    Dans une boucle, on a une phase de détermination des poids de chaque entrée (rassemblés dans un vecteur $v$ qui est mis à jour) puis une phase d'entrainement sur toutes les données (mise à jour des poids $w$).
+    Dans une boucle, on a une phase de détermination des poids de chaque entrée (rassemblés dans un vecteur $v$ qui est mis à jour) puis une phase d'entrainement sur toutes les données (mise à jour des poids $w$). De plus, lorsque l'on défini une méthode de Curiculum Learning (CL) on défini toujours une fonction objectif d'apprentissage que l'on cherche à minimiser. Dans notre cas cette fonction est :
+    
+    $\ \min_{w,v \in [0,1]^N} \mathbb{E}(w,v;\lambda) \sum_{i=1}^N v_i l_i + g(v;\lambda) \$
 
     - Mise à jour de $v$ :
         On cherche
-        $$ v^*_i = \arg \min_{v_i\in[0,1]} v_i l_i + g(v_i;\lambda) \text{pour} i = 1,2,...,n$$
+        $$ v^*_i = \arg \min_{v_i\in[0,1]} v_i l_i + g(v_i;\lambda) \text{ pour } i = 1,2,...,n$$
         où
         $$g(v;\lambda) = -\lambda \sum_{i=1}^{N} v_i$$
         est une norme l1 négative. $\lambda$ est un hyperparamètre : le paramètre d'âge qui contrôle la vitesse d'apprentissage. $l_i$ représente la valeur de la perte associée au couple $(x_i,y_i)$ qui est une donnée d'entrainement.
@@ -82,7 +84,9 @@ Ces deux étapes sont répétées tandis que la valeur de $\lambda$ augmente gra
 - - Mise à jour de $\lambda$ :
     On choisit une valeur initiale de $\lambda$ appelée $\lambda_0$ puis on la met à jour à chaque itération en la multipliant par une valeur plus grande que 1 ou en ajoutant une valeur positive. À la fin, 
 
-- Deuxième méthode :
+- <u>Deuxième méthode :</u>
+    On va ici changer la fonction définissant  
+
 
 #### 5.2 - Les points forts
 - La détermination de l'échelle de difficulté est semi-automatique et adapatée aux poids du réseau ce qui permet de rendre la courbe d'apprentissage dynamique car on peut la recalculer au cours de l'apprentissage.
