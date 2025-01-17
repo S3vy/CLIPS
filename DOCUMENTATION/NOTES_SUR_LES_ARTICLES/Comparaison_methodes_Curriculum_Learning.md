@@ -155,7 +155,7 @@ L'article fournit alors (Tableau 5) différentes fonctions de régularisation et
 
 **Quatrième méthode : Prior-embedded SPL**
 > Le but de cette méthode est d'inclure de la connaissance à priori dans le choix des valeurs des paramètres $v_i$ comme la mise à 0 de certains $v_i$ pour les cas que l'on sait difficile. Pour cela, on peut soit modifier la fonction de régularisation soit imposer une contrainte à certains $v_i^*$. L'article indique qu'il existe en général 4 types de connaissances à priori qui soient utiles pour le choix des $v_i^*$ (référence 73 de l'article) :
-> 1. A priori sur les valeures aberrants : des exemples avec une grande valeur de perte
+> 1. A priori sur les valeurs aberrantes : des exemples avec une grande valeur de perte
 > 2. A priori sur la régularité temporelle/spatiale : des exemples proches spatialement ou temporellement tendent à avoir des pertes similaires
 > 3. A priori sur l'importance de certains échantillons : on sait à l'avance que certains exemples sont plus importants que d'autres.
 > 4. A priori de diversité : certains exemples doivent être répartis de manière régulière dans les données pour aider l'algorithme à mieux apprendre.
@@ -175,7 +175,7 @@ L'article fournit alors (Tableau 5) différentes fonctions de régularisation et
 
 **Cinquième méthode : Autres améliorations de SPL**
 1. Mise à Jour de $\lambda$
-> Depuis le début de cette partie, on considère que lambda varie soi de manière additive soit de manière multiplicative mais toujours de la même façon. Cela peut poser problème car cette méthode peut inclure des exemples trop difficiles trop tôt.
+> Depuis le début de cette partie, on considère que lambda varie soit de manière additive soit de manière multiplicative mais toujours de la même façon. Cela peut poser problème car cette méthode peut inclure des exemples trop difficiles trop tôt.
 > On cherche donc d'autres méthodes pour mettre à jour $\lambda$. Une solution serait de reprendre une méthode analogue au planificateur Baby Step (section 4.2.2). Le but serait de définir une séquence $\bf{N} = \left\{ N_1,N_2,...,N_T \right\}$ telle que $\forall s<t N_s < N_t$ et $N_T=N$ où $N_t$ correspond au nombre d'exemple à apprendre à la $t-ieme$ epoch. On modifie alors la valeur de $\lambda$ pour assurer que l'on ai bien exactement $N_t$ exemples dont le poids $v_i$ est non nul. La référence 65 propose :
 > $$ \lambda_t =
 > \left\{ \begin{array}{ll}
@@ -226,6 +226,7 @@ Le but est de guider le réseau que l'on cherche à entraîner grâce à un rés
 #### 6.2 Les points forts
 * Méthode automatique
 * A fonctionné sur des exemples similaires
+* Très simple à implémenter
 #### 6.3 Les points faibles
 * Difficile à d'ajouter de l'information à priori
 #### 6.4 Dans quel cas cette méthode s'applique (taille du dataset, le nombre de classe à prédire, le nombre de données)
@@ -234,3 +235,27 @@ blabla
 blabla
 #### 6.6 Les performances de la méthode : comment est calculé le score, quelles améliorations le Curriculum Learning a-t-il appaorté ?
 blabla
+
+### 7 RL Teacher
+#### 7.1 Résumé de la méthode
+Les méthodes SPL et Transfert Teacher ne considère qu'un seul point de vue : soit le professeur, soit l'élève mais dans la réalité, le professeur s'adapte à l'élève et l'élève donne des retours sur la manière d'enseigner du professeur.
+La méthode du RL Teacher propose donc d'utiliser un modèle étudiant et un modèle professeur apprenant par renforcement. À chaque epoch, le professeur selctionne des exemples en fonction des retours de l'étudiant. Le retour de l'étudiant est donc utilisé en tant qu'état et en tant que récompense pour le prof. Le professeur est donc le mesureur de difficulté et le planificateur d'entrainement/étude. Des exemples sont donnés dans le tableau 7.
+
+#### 7.2 Points forts
+* Marche bien pour les réseaux profonds
+* Fonctionne bien pour du multitâche
+#### 7.3 Points faibles
+* Difficile à entrainer
+* Prends du temps à entrainer
+* Beaucoup de programation, pas du plug and play
+* Aucune info à priori, tout est automatique
+
+### 8 Autre méthodes automatiques de CL
+Ce sont des méthodes complètement automatiques qui à chaque époques veulent optimiser une fonction qui prend en entrée les données, l'état actuel du modèle étudiant, la tâche à accomplir et qui renvoie l'objectif de l'entrainement.=
+
+#### 7.2 Points forts
+* Marche bien pour les réseaux profonds
+* Fonctionne bien pour du multitâche
+#### 7.3 Points faibles
+* Un peu de programation (optimisation), pas du plug and play
+* Aucune info à priori, tout est automatique
