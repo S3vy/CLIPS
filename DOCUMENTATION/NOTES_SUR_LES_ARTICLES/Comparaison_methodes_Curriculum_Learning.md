@@ -36,13 +36,58 @@ Pour nous aider à bien choisir la méthode qu'il nous faut, lire :
 
 ### 1 - CL avec Bootsraping score
 #### Résumé de la méthode
-blabla
+Le bootstrap scoring est une méthode pour évaluer la difficulté ou la pertinence d'un exemple donné, afin de construire un curriculum. 
+Il consiste à Mesurer la difficulté d'un exemple en utilisant des estimations issues de modèles préexistants ou en cours d'entraînement.
+Classer les exemples selon leur score, puis les introduire progressivement au cours de l'entraînement.
+
+Former le modèle sur un échantillon initial ou aléatoire d'images puis Calculer les  scores pour chaque exemple ou région par des Critères pour le Bootstrap Score :
+
+Erreur de segmentation :Calculer l'erreur entre la prédiction et le ground truth pour chaque image ou région.
+Exemple :  Dice Score.
+
+Confiance des prédictions :Utiliser la probabilité ou la valeur de sortie des couches de segmentation.
+Les zones avec des valeurs proches des seuils de décision (par ex. 0.5 pour une segmentation binaire) sont plus difficiles.
+
+Variabilité locale ou structurelle :Les exemples avec des formes complexes ou des bordures floues peuvent être considérés comme plus difficiles.
+Mesurer la courbure ou les gradients dans les masques.
+
+Erreurs historiques :Si le modèle a systématiquement des erreurs sur une région ou une image donnée, ces exemples sont marqués comme difficiles.
+
 #### Les points forts
-blabla
+Convergence accélérée : Les exemples faciles permettent au modèle d'apprendre des représentations de base avant d'aborder des cas plus complexes.
+
+Meilleures performances générales : En traitant les exemples complexes une fois que le modèle est déjà partiellement entraîné, le risque de surajustement ou de mauvaises généralisation diminue.
+
+Adaptabilité :Le score peut être recalculé périodiquement pour s'adapter aux améliorations du modèle, créant un curriculum dynamique(Mettre à jour les scores périodiquement pendant l'entraînement :
+Recalculer les bootstrap scores après chaque phase d'entraînement.Réajuster le tri et les catégories pour refléter les progrès du modèle.)
+
 #### Les points faibles
-blabla
+Les scores bootstrap initiaux sont souvent calculés à partir d'un modèle peu ou pas entraîné. Ces scores peuvent être biaisés ou non représentatifs des vraies difficultés des exemples, ce qui peut :
+Introduire un mauvais tri des exemples.Solution potentielle : Recalculer périodiquement les scores pendant l'entraînement pour corriger les biais initiaux.
+
+Problème de déséquilibre des données
+Dans les tâches de segmentation, les données sont souvent déséquilibrées :
+Petites régions importantes (ex. : tumeurs) contre grandes régions simples (ex. : arrière-plan).
+Le bootstrap scoring peut favoriser les exemples avec de grandes régions faciles à segmenter, retardant l'apprentissage des petites régions complexes.
+
+ Définition de la "difficulté"
+La difficulté d'un exemple dépend du critère choisi (IoU, confiance, erreur, etc.). Si ce critère est mal défini ou trop simpliste :
+Des exemples importants (mais mal classés) peuvent être négligés.
+Les exemples trop complexes peuvent être introduits trop tard, limitant leur impact.
+Solution potentielle : Utiliser des critères de difficulté combinés (ex. : IoU + confiance + complexité structurelle).
 #### Dans quel cas cette méthode s'applique (taille du dataset, le nombre de classe à prédire, le nombre de données)
-blabla
+Nombre de Classes à Prédire
+Nombre de Classes Faible (2 à 5 classes) :
+Dans des cas binaires ou avec peu de classes, le curriculum learning peut être utilisé pour traiter des déséquilibres de classe.
+
+Avantage :
+
+Priorise les classes sous-représentées ou les zones difficiles à prédire.
+Améliore la segmentation des petites régions appartenant à des classes rares.
+Exemple :
+
+Segmentation d'images médicales avec une classe "tumeur" et une classe "fond"Nombre de Classes à Prédire
+
 #### Est-ce que ces cas d'application sont proche de notre cas à nous
 blabla
 #### Les performances de la méthode : comment est calculé le score, quelles améliorations le Curriculum Learning a-t-il appaorté ?
