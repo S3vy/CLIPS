@@ -178,11 +178,11 @@ Le but est de guider le réseau que l'on cherche à entraîner grâce à un rés
 * Startégie d'incertitude :
 > Dans les modèles de langage, le réseau donne en plus des mots une probabilité qui peut servir de fonction de classement d'importance des exemples.
 
-
 #### 6.2 Les points forts
-* Méthode semi automatique
+* Méthode automatique
+* A fonctionné sur des exemples similaires
 #### 6.3 Les points faibles
-blabla
+* Difficile à d'ajouter de l'information à priori
 #### 6.4 Dans quel cas cette méthode s'applique (taille du dataset, le nombre de classe à prédire, le nombre de données)
 blabla
 #### 6.5 Est-ce que ces cas d'application sont proche de notre cas à nous
