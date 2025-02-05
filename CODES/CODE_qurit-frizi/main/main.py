@@ -1198,7 +1198,7 @@ if __name__ == '__main__':
     parser.add_argument('--device', help='one of (`cpu`, `cuda:0`, ...)', default='cuda:0')
     args = parser.parse_args()
 
-    
+    print(INPUT_DIR)
     modality_dirs = dnc.list_of_modality_dirs(INPUT_DIR)
 
     slices_pt = dnc.read_slices_from_dir(modality_dirs['PT'])

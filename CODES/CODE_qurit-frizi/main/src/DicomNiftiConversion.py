@@ -63,6 +63,7 @@ def list_of_modality_dirs(input_dir):
     dir_list = next(os.walk(input_dir))[1]
     for direc in dir_list:
         file_list = os.listdir(os.path.join(input_dir, direc))
+        # print(file_list)
         for file in file_list:
             filename = os.path.join(input_dir, direc, file)
             if filename.endswith(".dcm"):
