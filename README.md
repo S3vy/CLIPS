@@ -19,6 +19,12 @@ Se placer à l'endroit où se trouve le fichier "requirement.txt" et executer
 ```
 pip install -r requirements.txt
 ```
+## venv
+creation environnment
+python -m venv C:\path\to\new\virtual\environment
+
+Activation de l'environnement :
+source <venv>/bin/activate
 
 # Lancement de l'inférence
 
@@ -53,3 +59,8 @@ for file in /home/clips/Projet_CLIPS_DATASIM_2025/CLIPS/DONNEES/dicom/*; do pyth
 # Activation environnement
 source /home/clips/Projet_CLIPS_DATASIM_2025/CLIPS_env/bin/activate
 
+# Autre
+liste des fichiers :
+ll
+Affichage des propriétées d'un fichier dicom :
+dcmdump PI_001_fd643c2091824b33803d2555c95fd571.dcm
