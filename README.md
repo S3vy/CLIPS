@@ -7,8 +7,18 @@ date: 20/11/2024
 Ce projet a pour but d'améliorer la segmentation des images PET à l'aide du curriculum learning.
 
 
-# Construction du Docker
+# Construction du Docker ou de l'environnement conda
+## Docker
 docker build -t tmtv-net-inference .
+## Micromamba et pip
+```
+micromamba create --name <nom_envionnement>
+sudo apt install python3-pip
+```
+Se placer à l'endroit où se trouve le fichier "requirement.txt" et executer
+```
+pip install -r requirements.txt
+```
 
 # Lancement de l'inférence
 
@@ -22,7 +32,15 @@ docker run -it -v /home/antho/CLIPS/DONNEES/11011101221002:/input -v /home/antho
 Se placer dans le dossier où se trouve le fichier main.py (pour nous : home/clips/Projet_CLIPS_DATASIM_2025/CLIPS/CODES/CODE_qurit-frizi/main/) puis exécuter :
 
 ```
+python <path/to/python/file>/main.py -it -v <path/to/patient/data/>11011101221002:/input -v <path/to/output>:/output tmtv-net-inference
+```
+Pour la configuration du PC au CHU :
+```
 python /home/clips/Projet_CLIPS_DATASIM_2025/CLIPS/CODES/CODE_qurit-frizi/main/main.py -it -v /home/antho/CLIPS/DONNEES/dicom/11011101221002:/input -v /home/clips/Projet_CLIPS_DATASIM_2025/CLIPS/DONNEES/pred_masks:/output tmtv-net-inference
+```
+Pour la configuration de mon PC personnel :
+```
+python main.py -it -v /home/antho/CLIPS/DONNEES/dicom/11011101221002:/input -v /home/clips/Projet_CLIPS_DATASIM_2025/CLIPS/DONNEES/pred_masks:/output tmtv-net-inference
 ```
 
 ## Pour plusieurs fichiers

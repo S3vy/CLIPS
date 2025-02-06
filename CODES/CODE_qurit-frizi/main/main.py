@@ -1,9 +1,20 @@
+import argparse
+
+parser = argparse.ArgumentParser(description="Exécution du programme avec fichiers d'entrée et sortie")
+parser.add_argument("--input", type=str, required=True, help="Chemin du fichier ou dossier d'entrée")
+parser.add_argument("--output", type=str, required=True, help="Chemin du dossier de sortie")
+
+args = parser.parse_args()
+
+print(f"Fichier d'entrée : {args.input}")
+print(f"Dossier de sortie : {args.output}")
+
 import sys
 sys.path.append('src')
 # Deployment env
 import os
-INPUT_DIR = "/input"
-OUTPUT_DIR = "/output"
+INPUT_DIR = args.output#"/input"
+OUTPUT_DIR = args.input#"/output"
 
 import copy
 import time
@@ -1457,3 +1468,15 @@ if __name__ == '__main__':
 
 
     
+if __name__ == "__main__":
+    if len(sys.argv) != 3:
+        print("Usage: python3 main.py INPUT OUTPUT")
+        sys.exit(1)
+
+    input_filename = sys.argv[1]
+    output_filename = sys.argv[2]
+
+    input_path = os.path.join(INPUT_DIR, input_filename)
+    output_path = os.path.join(OUTPUT_DIR, output_filename)
+
+    main(input_path, output_path)
