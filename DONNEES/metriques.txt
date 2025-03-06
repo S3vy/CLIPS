@@ -1,0 +1,34 @@
+
+
+Patient : 11011101021004
+Tolerance : 5
+Lesionwise threshold : 50.0%
+
+Max SUV = 23.127735137939453
+Distance moyenne : 10.613 mm
+Distance de Hausdorff : 44.9 mm
+Dice : 0.558
+NSD à 5mm : 0.668
+BJI à 5mm : 0.626
+
+TMTV calculé par TMTV-NET (non seuillé): 94.21ml
+TMTV calculé par TMTV-NET (seuillé): 52.1 ml
+TMTV réel (seuillé à 4): 134.4 ml 
+
+TMTV FP non seuillé :42.18 ml
+TMTV FP seuillé : 0.06 ml
+TMTV FN : 82.37 ml   
+TMTV TP : 52.03 ml
+Précision : 99.88 %
+Recall : 38.71 %
+
+Approach 1 :
+Nombre de lésions TP : 1 / 1 (100.0%)
+Nombre de lésions FN : 0 / 1 (0.0%)
+Nombre de prédictions FP : 0 / 1 (0.0%)
+
+Approach 2 :
+Nombre de lésions TP : 1 / 1 (100.0%)
+Nombre de lésions FN : 0 / 1 (0.0%)
+Nombre de prédictions FP : 0 / 1 (0.0%)
+    
