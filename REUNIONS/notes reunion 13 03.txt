@@ -1,0 +1,14 @@
+find_default_dataset_and_split_names
+
+create_datasets_inmemory_map
+
+date de récupération du code !!!!
+
+
+exemple de commande à lancer pour voir si ça fonctionne !
+
+faire ça ça ça et si obtient tel résultat : vérifier si ça marches
+
+résultat attendus, observations
+
+préciser toutes les diffcultées même très techniques

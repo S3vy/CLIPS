@@ -6,6 +6,18 @@ date: 20/11/2024
 # Description
 Ce projet a pour but d'améliorer la segmentation des images PET à l'aide du curriculum learning.
 
+# Démarche et réflexion de ce projet
+
+## Recherche biobliographique
+
+## Modification du code
+
+### main
+
+### trainer
+
+## Difficultés rencontrées
+
 # Structure de ce dépôt
 - **CODES** : Ces sont les fichiers qui correspondent au code de TMTV-Net
     - **CODE_qurit-frizi** : Le code original de TMTV-Net (disponible à l'adresse https://github.com/qurit-frizi/TMTV-Net). Nous y avons cependant ajouté quelques fichiers, notamment *main_modif.py* dans le dossier <code>main/</code>. Comme son nom l'indique, c'est une version modifiée de *modif.py* qui est le fichier original. La seule grosse modification que ce fichier a reçu est celle qui permet de l'éxécuter directement avec python, sans passer par Docker.
@@ -28,8 +40,7 @@ Ce projet a pour but d'améliorer la segmentation des images PET à l'aide du cu
 
 - **REUNIONS**
 
-
-# Construction du Docker ou de l'environnement conda
+# Construction du Docker ou de l'environnement venv
 ## Docker
 Création de l'envionnement : se placer dans le folder <code>main/</code> puis exécuter :
 
