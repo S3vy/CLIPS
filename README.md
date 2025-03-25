@@ -1,20 +1,24 @@
 ---
-title: Projet CLIPS
-author: FALK Anthonin & HAMIE Bachar
-date: 20/11/2024
+Titre: Projet CLIPS
+Auteurs: FALK Anthonin & HAMIE Bachar
+Date de création: 20/11/2024
 ---
 # Description
-Ce projet a pour but d'améliorer la segmentation des images PET à l'aide du curriculum learning.
+Ce projet a pour but d'améliorer les performances du réseau TMTV-Net dévelopé par F. Yousefirizi et al en 2024 qui réalise une segmentation automatiques d'images TEP/CT. Cette amélioration est supposée s'appuyer sur les méthodes de Curriculum Learning que nous avons trouvé dans la litérature. Nous abrégerons l'expression "Curriculum Learning" en CL par la suite.
 
-# Démarche et réflexion de ce projet
+Ce projet s'inscrit dans le cadre de l'option DATASIM de l'École Centrale de Nantes sur l'année scolaire 2024-2025. 
 
 ## Recherche biobliographique
 
-## Modification du code
+Nous avons débuté ce travail par une étape de réalisation d'un état de l'art des méthodes de CL déjà existantes dans la litérature scientifique. Toutes les sources que nous avons utilisées peuvent être trouvées dans le dossier <code>DOCUMENTATION/ARTICLES</code> et un rapport presque complet de ces méthodes est disponible sous la forme d'un fichier Markdown ici : <code>DOCUMENTATION/NOTES_SUR_LES_ARTICLES/Comparaison_methodes_Curriculum_Learning.md</code>
 
-### main
+## Compréhension du code
 
-### trainer
+### Inférence (ie. segmentation d'un patient)
+
+Le lancement de l'inférence se fait grâce au fichier <code>main/main.py</code>, l'appel fonctionne correctement avec les commandes docker mais 
+
+### Entraînement du réseau
 
 ## Difficultés rencontrées
 
@@ -72,10 +76,10 @@ pip install -r requirements.txt
 ```
 
 ## Attention
-Pour le PC au CHU, un environnement micromamba, miniconda ou conda est incompatible avec le programme (j'ai vraiment essayé de toutes mes forces)
+Pour le PC au CHU, un environnement micromamba, miniconda ou conda est incompatible avec le programme (j'ai vraiment essayé de toutes mes forces).
 
 # Avant le lancement de l'inférence
-Avant de pouvoir lancer l'inférence sur un patient, il est nécessaire de télécharger les poids du réseau. On remets ainsi les directives inscrite dans le fichier README du dépôt Git original :
+Avant de pouvoir lancer l'inférence sur un patient, il est nécessaire de télécharger les poids du réseau. On remets ainsi les directives inscrite dans le fichier README du dépôt Git original (il serait bon toutefois de vérifier si le lien change au cours du temps sachant qu'il fonctionne correctement en mars 2025) :
 
 ```
 This repository includes large models that are hosted on Google Drive due to their size. To download the models, follow these steps:
@@ -93,23 +97,24 @@ After downloading, please place the model files in a folder named "models" withi
 
 ## Pour un seul patient
 ### Avec Docker
-```
+
+```bash
 docker run -it -v /home/antho/CLIPS/DONNEES/11011101221002:/input -v /home/antho/CLIPS/DONNEES/Sortie_algo:/output tmtv-net-inference
 ```
 
-### Sans Docker
-Se placer dans le dossier où se trouve le fichier main.py (pour nous : home/clips/Projet_CLIPS_DATASIM_2025/CLIPS/CODES/CODE_qurit-frizi/main/) puis exécuter :
+### Sans Docker (avec environnement venv activé)
+Le lancement sans Docker demande de ne pas appeller le fichier <code>main/main.py</code> tel qu'il a été écrit mais une version modifiée telle que décrite dans la section **Compréhension du code**.
 
-Pour la configuration du PC au CHU :
-```
-python /home/clips/Projet_CLIPS_DATASIM_2025/CLIPS/CODES/CODE_qurit-frizi/main/main.py -it -v /home/antho/CLIPS/DONNEES/dicom/11011101221002:/input -v /home/clips/Projet_CLIPS_DATASIM_2025/CLIPS/DONNEES/pred_masks:/output tmtv-net-inference
+Avec ça en tête, il faut se placer dans le dossier où se trouve le fichier main.py (pour nous : home/clips/Projet_CLIPS_DATASIM_2025/CLIPS/CODES/CODE_qurit-frizi/main/) puis exécuter (dans le cas de la configuration du PC au CHU) :
+
+```bash
+python main.py /home/antho/CLIPS/DONNEES/dicom/11011101221002:/input -v /home/clips/Projet_CLIPS_DATASIM_2025/CLIPS/DONNEES/pred_masks:/output tmtv-net-inference
 ```
 
 ## Pour plusieurs fichiers
-### Version de Yahya (avec docker)
+### Version avec Docker (ligne de commande proposé par Yahya)
 for file in ./dicom/*; do sudo docker run -it --gpus all -v "$file":/input -v '/home/yahya/Documents/Stage TMTV-NET/data/pred_masks':/output tmtv-net-inference-no-sitk; done
 
-### Version projet CLIPS (sans docker)
 
 # Petites commandes utiles
 Obtenir la liste des fichiers et de leur détails :

@@ -1,20 +1,20 @@
-# import argparse
+import argparse
 
-# parser = argparse.ArgumentParser(description="Exécution du programme avec fichiers d'entrée et sortie")
-# parser.add_argument("--input", type=str, required=True, help="Chemin du fichier ou dossier d'entrée")
-# parser.add_argument("--output", type=str, required=True, help="Chemin du dossier de sortie")
+parser = argparse.ArgumentParser(description="Exécution du programme avec fichiers d'entrée et sortie")
+parser.add_argument("--input", type=str, required=True, help="Chemin du fichier ou dossier d'entrée")
+parser.add_argument("--output", type=str, required=True, help="Chemin du dossier de sortie")
 
-# args,unknown = parser.parse_known_args()
+args = parser.parse_args()
 
-# print(f"Fichier d'entrée : {args.input}")
-# print(f"Dossier de sortie : {args.output}")
+print(f"Fichier d'entrée : {args.input}")
+print(f"Dossier de sortie : {args.output}")
 
 import sys
 sys.path.append('src')
 # Deployment env
 import os
-INPUT_DIR = "/input"
-OUTPUT_DIR = "/output"
+INPUT_DIR = args.output#"/input"
+OUTPUT_DIR = args.input#"/output"
 
 import copy
 import time
@@ -301,7 +301,6 @@ InferenceOutput = namedtuple('InferenceOutput', 'output_found output_truth outpu
 #         writer.write(rtss_combination, output_dir_path,
 #                      subject.get_name(), dicom_series_info)
 
-print("test1")
 
 def get_MIP_from_3Dnifti(path, axis_num):
     # Load the Nifti file
@@ -1029,8 +1028,8 @@ def debug_output(seg: sitk.Image, seg_path: str, uid:str, dicom_path: str):
     now = datetime.datetime.now()
     # Format the date and time as a string
     timestamp = now.strftime('%Y-%m-%d_%H-%M-%S')
-    # rtstruct.save(os.path.join(output_path, 'tmtv-rt-struct_'+timestamp))
-    rtstruct.save(os.path.join(output_path, uid+'_tmtv-rt-struct'))
+    # rtstruct.save(os.path.join(OUTPUT_DIR, 'tmtv-rt-struct_'+timestamp))
+    rtstruct.save(os.path.join(OUTPUT_DIR, uid+'_tmtv-rt-struct'))
     print('output spacing=', seg.GetSpacing())
     print('output origin=', seg.GetOrigin())
     print('output shape=', seg.GetSize())
@@ -1193,7 +1192,7 @@ if __name__ == '__main__':
         '--model_refiner_path', '/mnt/datasets/ludovic/AutoPET/submissions/AutoPET_cnn_v22/model_refiner/best_dice_foreground_e6000_0.6803068066681786.model',
         #'--output_path', '/mnt/datasets/ludovic/AutoPET/tmp/inference1_refiner_seg.npy',
         '--output_path', '/mnt/datasets/ludovic/AutoPET/tmp/',
-        '--device', 'cuda:0'seg_output_path
+        '--device', 'cuda:0'
     ]
     """
     
@@ -1208,15 +1207,9 @@ if __name__ == '__main__':
     parser.add_argument('--output_path', help='folder or full path where the segmentation will be exported', default=OUTPUT_DIR)
     # parser.add_argument('--device', help='one of (`cpu`, `cuda:0`, ...)', default='cpu')
     parser.add_argument('--device', help='one of (`cpu`, `cuda:0`, ...)', default='cuda:0')
-
-    #Ajout de l'argument du dossier d'entrée 
-    #FIXME
-    parser.add_argument('--input_path', help='path to folder containing at least two subfolder : one four the CT volume and one for the PET volume', default=INPUT_DIR)
-
     args = parser.parse_args()
 
-    INPUT_DIR = args.input_path
-    print(f"INPUT_DIR : {INPUT_DIR}")
+    print(INPUT_DIR)
     modality_dirs = dnc.list_of_modality_dirs(INPUT_DIR)
 
     slices_pt = dnc.read_slices_from_dir(modality_dirs['PT'])
@@ -1250,9 +1243,7 @@ if __name__ == '__main__':
     pt_path = './TMP_INPUT/PT'
     model_large_fov_path = './src/models/e_latest.model'
     model_refiner_path = './src/models/r_latest.model'
-    
-    #On change le chemin de sauvegarde
-    output_path = args.output_path
+    output_path = OUTPUT_DIR
 
     print(f'starting...\nPID={os.getpid()}')
     is_available = torch.cuda.is_available()
@@ -1352,8 +1343,8 @@ if __name__ == '__main__':
 
     # image_file_name = "ensambled_"+patientid+".png"
     image_file_name = "ensambled_.png"
-    # filename_figure = os.path.join(output_path, image_file_name)
-    filename_figure = os.path.join(output_path, image_file_name)
+    # filename_figure = os.path.join(OUTPUT_DIR, image_file_name)
+    filename_figure = os.path.join(OUTPUT_DIR, image_file_name)
 
 
     plt.rcParams.update({'font.size': 5})
@@ -1477,15 +1468,15 @@ if __name__ == '__main__':
 
 
     
-# if __name__ == "__main__":
-#     if len(sys.argv) != 3:
-#         print("Usage: python3 main.py INPUT OUTPUT")
-#         sys.exit(1)
+if __name__ == "__main__":
+    if len(sys.argv) != 3:
+        print("Usage: python3 main.py INPUT OUTPUT")
+        sys.exit(1)
 
-#     input_filename = sys.argv[1]
-#     output_filename = sys.argv[2]
+    input_filename = sys.argv[1]
+    output_filename = sys.argv[2]
 
-#     input_path = os.path.join(INPUT_DIR, input_filename)
-#     output_path = os.path.join(output_path, output_filename)
+    input_path = os.path.join(INPUT_DIR, input_filename)
+    output_path = os.path.join(OUTPUT_DIR, output_filename)
 
-#     main(input_path, output_path)
+    main(input_path, output_path)
