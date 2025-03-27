@@ -1,20 +1,20 @@
-import argparse
+# import argparse
 
-parser = argparse.ArgumentParser(description="Exécution du programme avec fichiers d'entrée et sortie")
-parser.add_argument("--input", type=str, required=True, help="Chemin du fichier ou dossier d'entrée")
-parser.add_argument("--output", type=str, required=True, help="Chemin du dossier de sortie")
+# parser = argparse.ArgumentParser(description="Exécution du programme avec fichiers d'entrée et sortie")
+# parser.add_argument("--input", type=str, required=True, help="Chemin du fichier ou dossier d'entrée")
+# parser.add_argument("--output", type=str, required=True, help="Chemin du dossier de sortie")
 
-args = parser.parse_args()
+# args = parser.parse_args()
 
-print(f"Fichier d'entrée : {args.input}")
-print(f"Dossier de sortie : {args.output}")
+# print(f"Fichier d'entrée : {args.input}")
+# print(f"Dossier de sortie : {args.output}")
 
 import sys
 sys.path.append('src')
 # Deployment env
 import os
-INPUT_DIR = args.output#"/input"
-OUTPUT_DIR = args.input#"/output"
+# INPUT_DIR = args.output#"/input"
+# OUTPUT_DIR = args.input#"/output"
 
 import copy
 import time
@@ -1202,14 +1202,18 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='Process PET and CT wholebody images and gives suspicious segments')
     # parser.add_argument('--ct_path', help='path to CT volume. Can be a directory with a single volume or full pathname', default='./TMP_INPUT/CT')
     # parser.add_argument('--pt_path', help='path to 18F-FDG PET volume expressed in SUVbw unit. Can be a directory with a single volume or full pathname', default='./TMP_INPUT/PT')
+    parser.add_argument('--input_dir', help='path to PET and CT volume') #HERE
     # parser.add_argument('--model_large_fov_path', help='', default='./src/models/e_latest.model')
     # parser.add_argument('--model_refiner_path', help='', default='./src/models/r_latest.model')
-    parser.add_argument('--output_path', help='folder or full path where the segmentation will be exported', default=OUTPUT_DIR)
+    parser.add_argument('--output_path', help='folder or full path where the segmentation will be exported')
     # parser.add_argument('--device', help='one of (`cpu`, `cuda:0`, ...)', default='cpu')
     parser.add_argument('--device', help='one of (`cpu`, `cuda:0`, ...)', default='cuda:0')
     args = parser.parse_args()
 
-    print(INPUT_DIR)
+    INPUT_DIR = args.input_dir #HERE
+    OUTPUT_DIR = args.output_path #HERE
+    
+    print(INPUT_DIR)    
     modality_dirs = dnc.list_of_modality_dirs(INPUT_DIR)
 
     slices_pt = dnc.read_slices_from_dir(modality_dirs['PT'])
@@ -1468,15 +1472,15 @@ if __name__ == '__main__':
 
 
     
-if __name__ == "__main__":
-    if len(sys.argv) != 3:
-        print("Usage: python3 main.py INPUT OUTPUT")
-        sys.exit(1)
+# if __name__ == "__main__":
+#     if len(sys.argv) != 3:
+#         print("Usage: python3 main.py INPUT OUTPUT")
+#         sys.exit(1)
 
-    input_filename = sys.argv[1]
-    output_filename = sys.argv[2]
+#     input_filename = sys.argv[1]
+#     output_filename = sys.argv[2]
 
-    input_path = os.path.join(INPUT_DIR, input_filename)
-    output_path = os.path.join(OUTPUT_DIR, output_filename)
+#     input_path = os.path.join(INPUT_DIR, input_filename)
+#     output_path = os.path.join(OUTPUT_DIR, output_filename)
 
-    main(input_path, output_path)
+#     main(input_path, output_path)

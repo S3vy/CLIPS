@@ -67,7 +67,7 @@ def list_of_modality_dirs(input_dir):
         for file in file_list:
             filename = os.path.join(input_dir, direc, file)
             if filename.endswith(".dcm"):
-                ds = pydicom.read_file(filename)
+                ds = pydicom.dcmread(filename)
                 Patient_ID = ds.PatientID
                 if ds.Modality == 'PT':
                     print('Found PET DIR')
@@ -91,7 +91,7 @@ def read_slices_from_dir(input_dir):
         for file in files:
             if file.endswith(".dcm"):
                 filename_full = os.path.join(root, file)
-                ds = pydicom.read_file(filename_full)
+                ds = pydicom.dcmread(filename_full)
                 dicom_files.append(ds)
     # second, only choose files that have 'location' attribure, and sort
     slices = []
